@@ -16,8 +16,8 @@ export const useProductDetailsStyles = createUseStyles((theme) => ({
     },
   },
   productImage: {
-    width: 200,
-    height: 200,
+    width: 280,
+    height: 280,
   },
   productTitle: {
     fontSize: ".8rem",

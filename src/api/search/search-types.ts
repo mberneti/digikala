@@ -9,8 +9,8 @@ export enum SortEnum {
 export interface ISearchProductPayload {
   page: number;
   rows: number;
-  "price[min]": number;
-  "price[max]": number;
+  "price[min]"?: number;
+  "price[max]"?: number;
   has_selling_stock?: 1;
   sort: SortEnum;
   q: string;

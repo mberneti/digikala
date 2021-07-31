@@ -35,6 +35,9 @@ export const useSearchProducts = (): IUseGetDepartmentsReturnProps => {
     async (payload: Partial<ISearchProductPayload> = {}) => {
       setRequestState("loading");
       const isFirstPageLoad = !payload.page || payload.page === 1;
+      if (isFirstPageLoad) {
+        setProducts({});
+      }
       try {
         if (cancelToken.current) {
           cancelToken.current.cancel();

@@ -9,11 +9,6 @@ import ProductListItem from "./ProductListItem";
 import { useProductListStyles } from "./useProductListStyles";
 import { useSearchProducts } from "./useSearchProducts";
 
-export interface IFormFilters
-  extends Omit<ISearchProductPayload, "has_selling_stock" | "page" | "rows"> {
-  has_selling_stock: boolean;
-}
-
 function ProductList() {
   usePageTitle("محصولات | فروشگاه اینترنتی دیجیکالا");
   const classes = useProductListStyles();

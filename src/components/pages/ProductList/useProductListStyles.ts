@@ -27,8 +27,8 @@ export const useProductListStyles = createUseStyles((theme: ITheme) => ({
     cursor: "pointer",
   },
   productImage: {
-    width: "100px",
-    height: "100px",
+    width: "200px",
+    height: "200px",
     cursor: "pointer",
   },
   detailsLink: {

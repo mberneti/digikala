@@ -9,17 +9,20 @@ import useDebounce from "../../../../hooks/useDebounce";
 import { mapFormFiltersToSearchPayload } from "../productListUtils";
 import { useProductFiltersStyles } from "./useProductFiltersStyles";
 
-export interface IFormFilters
-  extends Omit<ISearchProductPayload, "has_selling_stock" | "page" | "rows"> {
-  has_selling_stock: boolean;
+export interface IFormFilters {
+  q: string;
+  has_selling_stock: false;
+  sort: SortEnum;
+  "price[min]": string;
+  "price[max]": string;
 }
 
 const filtersInitialValues: IFormFilters = {
   q: "",
   has_selling_stock: false,
   sort: SortEnum.mostRelevant,
-  "price[min]": 0,
-  "price[max]": 100000,
+  "price[min]": "",
+  "price[max]": "",
 };
 
 interface IProps {
@@ -77,6 +80,13 @@ function ProductListFilters({ isLoading, onFilter }: IProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedQuery]);
 
+  const onEnterHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== "Enter") {
+      return;
+    }
+    getPage();
+  };
+
   return (
     <>
       <DBox
@@ -102,20 +112,22 @@ function ProductListFilters({ isLoading, onFilter }: IProps) {
         >
           <div>
             <input
-              placeholder="حداقل"
+              placeholder="حداقل قیمت"
               type="number"
               className={classes.searchInput}
               onChange={handleInputChange("price[min]")}
               value={filters["price[min]"]}
+              onKeyDown={onEnterHandler}
             />
           </div>
           <div>
             <input
-              placeholder="حداکثر"
+              placeholder="حداکثر قیمت"
               type="number"
               className={classes.searchInput}
               onChange={handleInputChange("price[max]")}
               value={filters["price[max]"]}
+              onKeyDown={onEnterHandler}
             />
           </div>
         </DBox>
