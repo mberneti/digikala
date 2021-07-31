@@ -9,6 +9,7 @@ interface IDIconProps {
   color: IColor;
   weight?: string;
   className?: string;
+  onClick?: () => void;
 }
 
 const useStyles = createUseStyles((theme) => ({
@@ -33,7 +34,7 @@ const DIcon: React.FC<IDIconProps> = (props) => {
   const iconClasses = clsx(props.className, fontIconClassName, classes.icon);
 
   return (
-    <div className={classes.iconContainer}>
+    <div className={classes.iconContainer} onClick={props.onClick}>
       <span className={iconClasses} />
     </div>
   );

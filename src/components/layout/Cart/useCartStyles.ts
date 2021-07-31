@@ -1,0 +1,78 @@
+import { createUseStyles } from "react-jss";
+import { ITheme } from "../../../theme/DThemeProvider";
+
+export const useProductListStyles = createUseStyles((theme: ITheme) => ({
+  productsListScroll: {
+    display: "flex",
+    flexDirection: "column",
+    padding: "2rem 1rem",
+    overflowY: "scroll",
+    direction: "ltr",
+    flex: 1,
+    "& *": {
+      direction: "rtl",
+    },
+  },
+  products: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "200px",
+  },
+  totalPriceLabel: {
+    textAlign: "center",
+    fontSize: ".9rem",
+    display: "block",
+    width: "100%",
+    marginTop: ".8rem",
+    color: theme.colors.grayscaleBody,
+  },
+  productTitle: {
+    textAlign: "center",
+    fontSize: ".75rem",
+    width: "100%",
+    maxWidth: 300,
+    cursor: "pointer",
+    marginBottom: 0,
+  },
+  productPriceLabel: {
+    textAlign: "center",
+    fontSize: ".8rem",
+    display: "block",
+    width: "100%",
+    marginTop: ".5rem",
+    marginBottom: ".6rem",
+    color: theme.colors.grayscaleBody,
+  },
+  productImage: {
+    width: "200px",
+    height: "200px",
+    cursor: "pointer",
+  },
+  detailsLink: {
+    fontSize: ".8rem",
+    fontWeight: "800",
+    textDecoration: "unset",
+    padding: "0 12px",
+    borderRadius: "2rem",
+    color: theme.colors.commonWhite,
+    backgroundColor: theme.colors.commonBlack,
+    height: "2rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: ".5rem",
+    marginLeft: ".5rem",
+  },
+  addToCardButton: {
+    cursor: "pointer",
+    height: "2rem",
+    width: "2rem",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: theme.colors.grayscaleInputBackground,
+  },
+}));

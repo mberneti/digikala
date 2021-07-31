@@ -9,6 +9,8 @@ export const searchProducts = async (
   cancelToken: CancelToken,
 ): Promise<ISearchResultResult> => {
   return await axiosInstance
-    .get("search/?" + qs.stringify(searchPayload), { cancelToken })
+    .get("search/?" + qs.stringify(searchPayload), {
+      cancelToken,
+    })
     .then(filterResponse);
 };

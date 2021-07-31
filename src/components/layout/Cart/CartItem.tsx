@@ -1,17 +1,19 @@
 import { Link, useHistory } from "react-router-dom";
-import { ISearchProductItem } from "../../../api/search/search-types";
 import DBox from "../../../core/DBox";
 import DIcon from "../../../core/DIcon";
-import { useProductListStyles } from "./useProductListStyles";
+import { useProductListStyles } from "./useCartStyles";
 import { useDispatch } from "react-redux";
-import { mapProductToCartItem } from "../../../redux/modules/cart/cartUtils";
-import { addToCartAction } from "../../../redux/modules/cart/cartActions";
+import {
+  decreaseQuantityByProductIdAction,
+  increaseQuantityByProductIdAction,
+} from "../../../redux/modules/cart/cartActions";
+import { ICartProduct } from "../../../redux/modules/cart/cartType";
 
 interface IProps {
-  product: ISearchProductItem;
+  product: ICartProduct;
 }
 
-function ProductListItem({ product }: IProps) {
+function CartItem({ product }: IProps) {
   const classes = useProductListStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -20,9 +22,12 @@ function ProductListItem({ product }: IProps) {
     history.push(`/product/${productId}`);
   };
 
-  const addToCart = (product: ISearchProductItem) => () => {
-    const cartItem = mapProductToCartItem(product);
-    dispatch(addToCartAction(cartItem));
+  const increaseProductQuantity = (productId: number) => () => {
+    dispatch(increaseQuantityByProductIdAction(productId));
+  };
+
+  const decreaseProductQuantity = (productId: number) => () => {
+    dispatch(decreaseQuantityByProductIdAction(productId));
   };
 
   return (
@@ -38,13 +43,14 @@ function ProductListItem({ product }: IProps) {
     >
       <img
         className={classes.productImage}
-        src={product.images.main}
+        src={product.image}
         alt={product.title}
         onClick={goToDetails(product.id)}
       />
       <h3 className={classes.productTitle} onClick={goToDetails(product.id)}>
         {product.title}
       </h3>
+      <label className={classes.productPriceLabel}>{product.price} ریال</label>
       <DBox
         display="flex"
         justifyContent="center"
@@ -52,10 +58,19 @@ function ProductListItem({ product }: IProps) {
         mt={0.5}
         width="100%"
       >
+        <div
+          className={classes.addToCardButton}
+          onClick={decreaseProductQuantity(product.id)}
+        >
+          <DIcon name="minus" size="12px" color="commonBlack" weight="bold" />
+        </div>
         <Link className={classes.detailsLink} to={`product/${product.id}`}>
-          جزئیات
+          {product.quantity}
         </Link>
-        <div className={classes.addToCardButton} onClick={addToCart(product)}>
+        <div
+          className={classes.addToCardButton}
+          onClick={increaseProductQuantity(product.id)}
+        >
           <DIcon name="plus" size="12px" color="commonBlack" weight="bold" />
         </div>
       </DBox>
@@ -63,4 +78,4 @@ function ProductListItem({ product }: IProps) {
   );
 }
 
-export default ProductListItem;
+export default CartItem;

@@ -7,6 +7,7 @@ import * as CSS from "csstype";
 interface IDBoxProps
   extends Pick<
     CSS.StandardLonghandProperties,
+    | "cursor"
     | "flexGrow"
     | "width"
     | "height"
@@ -29,6 +30,7 @@ interface IDBoxProps
   pl?: number;
   className?: string;
   flex?: CSS.Property.Flex;
+  onClick?: () => void;
 }
 
 const useStyles = createUseStyles((theme) => ({
@@ -59,7 +61,11 @@ const DBox: React.FC<IDBoxProps> = ({ children, ...props }) => {
   const classes = useStyles(props);
   const boxClasses = clsx(props.className, classes.box);
 
-  return <div className={boxClasses}>{children}</div>;
+  return (
+    <div className={boxClasses} onClick={props.onClick}>
+      {children}
+    </div>
+  );
 };
 
 export default DBox;
