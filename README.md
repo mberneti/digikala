@@ -1,3 +1,6 @@
+# ⚠️ It seems the digikala back-end service doesn't support API calls with mobile user-agent headers. (So it isn't working on mobile browsers and either when you want to check it via the responsive section of the chrome devtools)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
